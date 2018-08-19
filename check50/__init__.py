@@ -32,7 +32,7 @@ def _setup_translation():
 _set_version()
 _setup_translation()
 
-from .api import (
+from ._api import (
     import_checks,
     data, _data,
     exists,
@@ -44,7 +44,7 @@ from .api import (
 )
 
 
-from .runner import check
+from ._runner import check
 from pexpect import EOF
 
 __all__ = ["import_checks", "data", "exists", "hash", "include",

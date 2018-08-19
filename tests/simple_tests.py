@@ -1,10 +1,11 @@
-import unittest
 import os
-import yaml
 import pathlib
-import check50
-import check50.simple
 import tempfile
+import unittest
+
+import yaml
+
+from check50 import _simple
 
 class Base(unittest.TestCase):
 
@@ -40,7 +41,7 @@ def bar():
     \"\"\"bar\"\"\"
     check50.run("python3 foo.py").stdin("baz", prompt=False).stdout("baz", regex=False).exit(0)"""
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertEqual(result, expectation)
 
     def test_multiple_checks(self):
@@ -67,7 +68,7 @@ def baz():
     \"\"\"baz\"\"\"
     check50.run("python3 foo.py").exit(0)"""
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertEqual(result, expectation)
 
     def test_multi(self):
@@ -92,7 +93,7 @@ def bar():
     \"\"\"bar\"\"\"
     check50.run("python3 foo.py").stdin("foo\\nbar", prompt=False).stdout("baz\\nqux", regex=False).exit(0)"""
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertEqual(result, expectation)
 
     def test_multiline(self):
@@ -114,7 +115,7 @@ def bar():
     \"\"\"bar\"\"\"
     check50.run("python3 foo.py").stdout("Hello\\nWorld!\\n", regex=False).exit(0)"""
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertEqual(result, expectation)
 
     def test_number_in_name(self):
@@ -124,7 +125,7 @@ def bar():
     - run: python3 foo.py
 """)["checks"]
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertTrue("def _0bar" in result)
         self.assertTrue("\"\"\"0bar\"\"\"" in result)
 
@@ -135,7 +136,7 @@ def bar():
     - run: python3 foo.py
 """)["checks"]
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertTrue("def bar_baz" in result)
         self.assertTrue("\"\"\"bar baz\"\"\"" in result)
 
@@ -146,7 +147,7 @@ def bar():
     - run: python3 foo.py
 """)["checks"]
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertTrue("def bar_baz" in result)
         self.assertTrue("\"\"\"bar-baz\"\"\"" in result)
 
@@ -157,7 +158,7 @@ def bar():
     - run: python3 foo.py
 """)["checks"]
 
-        result = check50.simple.compile(checks)
+        result = _simple.compile(checks)
         self.assertTrue(".exit()" in result)
 
 

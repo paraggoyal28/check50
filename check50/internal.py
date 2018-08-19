@@ -8,7 +8,7 @@ import sys
 
 import lib50
 
-from . import simple
+from . import _simple
 
 #: Directory containing the check and its associated files
 check_dir = None
@@ -99,7 +99,7 @@ def load_config(check_dir):
     if isinstance(options["checks"], dict):
         # Compile simple checks
         with open(check_dir / "__init__.py", "w") as f:
-            f.write(simple.compile(options["checks"]))
+            f.write(_simple.compile(options["checks"]))
         options["checks"] = "__init__.py"
 
     return options
