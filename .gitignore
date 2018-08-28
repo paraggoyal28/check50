@@ -66,16 +66,20 @@ instance/
 # Sphinx documentation
 docs/build/
 
+
 # PyBuilder
 target/
 
-# Jupyter Notebook
+
+
+
 .ipynb_checkpoints
 
 # pyenv
 .python-version
 
 # celery beat schedule file
+
 celerybeat-schedule
 
 # SageMath parsed files
@@ -91,6 +95,8 @@ env.bak/
 venv.bak/
 
 # Spyder project settings
+
+
 .spyderproject
 .spyproject
 
